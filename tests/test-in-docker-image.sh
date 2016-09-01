@@ -135,8 +135,8 @@ function extra_tests(){
     echo "TEST: scontrol show node"
     scontrol show node
 
-    echo "TEST: srun env"
-    srun env
+    echo "TEST: srun --immediate=30 env"
+    srun --immediate=30 env
     
 }
 
