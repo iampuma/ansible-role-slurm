@@ -57,7 +57,7 @@ admingroup: "admin"
 nis_server: False
 
 fgci_install: True
-fgci_slurmrepo_version: "fgcislurm1508"
+fgci_slurmrepo_version: "fgcislurm1605"
 siteName: "io"
 nodeBase: "{{ siteName }}"
 nodeGpuBase: "gpu"
@@ -83,7 +83,7 @@ slurm_Prolog: "/etc/slurm/prolog"
 slurm_Epilog: "/usr/local/libexec/slurm/epilog.d/*"
 slurm_TaskEpilog: "/usr/bin/epilog"
 slurm_TaskPlugin: "task/cgroup"
-slurm_version: "15.08.3"
+slurm_version: "16.05.4"
 slurm_build: False
 slurm_log_dir: "/var/log/slurm"
 slurm_logrotate_rotate_interval: "weekly"

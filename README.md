@@ -9,12 +9,14 @@ Tested with slurm versions:
  - 14.11.0
  - 14.11.3
  - 15.08.x
+ - 16.05.x
 
 Tested with these linux distributions:
  - CentOS 6
   - Only 14.11.x
  - CentOS 7
-  - Only 15.08.x
+  - 15.08.x
+  - 16.05.x
 
 ## Dependencies
 
