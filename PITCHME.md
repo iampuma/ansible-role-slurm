@@ -211,12 +211,12 @@ If you want 16.05 set this variable (for example in test.yml):
 
 #HSLIDE
 
-how we work / release management:
+**how we work / release management:**
 
 ~8 clusters in Finland (the ones part of FGCI) are using https://github.com/CSC-IT-Center-for-Science/fgci-ansible which uses this ansible-role-slurm role. 
 Triton is the largest cluster with ~613 nodes
 
-ansible-galaxy and requirements.yml to restrict which version/commit of an ansible role is used
+**ansible-galaxy** and **requirements.yml** to restrict which version/commit of an ansible role is used
 
 #HSLIDE
 
