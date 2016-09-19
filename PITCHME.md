@@ -236,3 +236,7 @@ Triton is the largest cluster with ~613 nodes
 #HSLIDE
 
 #Fin
+
+[https://gitpitch.com/CSC-IT-Center-for-Science/ansible-role-slurm/gitpitch](https://gitpitch.com/CSC-IT-Center-for-Science/ansible-role-slurm/gitpitch)
+
+@martbhell
