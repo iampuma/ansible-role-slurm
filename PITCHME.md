@@ -40,6 +40,7 @@ What we do - homogeneousish configuration.
 
  - maybe similar to puppet, quattor, cfengine, salt, chef
  - no daemon, uses ssh for push mode or cronjob for pull
+ - quick poll
 
 #HSLIDE
 
