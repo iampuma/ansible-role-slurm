@@ -1,3 +1,4 @@
+ -
 #Configure a slurm cluster with ansible
 
 CSC - IT Center for Science Ltd
@@ -87,6 +88,8 @@ What we do - homogeneousish configuration.
 ... too many
 
 #HSLIDE
+
+ - 
 
 ![FGCILogo](images/slurm-list-tasks.gif)
 
