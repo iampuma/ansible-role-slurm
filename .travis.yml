@@ -11,6 +11,7 @@ matrix:
   fast_finish: true
 
 env:
+  - CONTAINERS=2
   - IMAGE_BUILD_PLATFORM=devel-centos7
 #  - IMAGE_BUILD_PLATFORM=stable-centos7
 #  - IMAGE_BUILD_PLATFORM=epel-centos7
@@ -31,8 +32,9 @@ script:
   # Build the image
   - docker build -t ${REPO}:${IMAGE_BUILD_PLATFORM} ${TESTDIR}/${IMAGE_BUILD_PLATFORM}/
   # Launch the containers
-  - docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init
-  - docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init
+  - export DOCKERRUNCOMMAND="$(docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init)"
+  - for i in $(seq 1 $CONTAINERS); do docker run --privileged -d -ti --name "slurm-$i" -e "container=docker" -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init; done
+#  - docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init
   - docker ps -a
   - DOCKER_CONTAINER_ID=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | head -1 | awk '{print $1}')
   - DOCKER_CONTAINER_ID2=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | tail -1 | awk '{print $1}')
