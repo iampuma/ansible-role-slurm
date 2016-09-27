@@ -7,8 +7,8 @@
     command: /bin/true
     notify:
       - restart slurmd
-      - restart slurmctld
       - restart slurmdbd
+      - restart slurmctld
     changed_when: True
 
   - name: restart slurmd
