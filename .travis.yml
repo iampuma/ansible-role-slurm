@@ -11,8 +11,8 @@ matrix:
   fast_finish: true
 
 env:
-#  - IMAGE_BUILD_PLATFORM=stable-centos7
   - IMAGE_BUILD_PLATFORM=devel-centos7
+#  - IMAGE_BUILD_PLATFORM=stable-centos7
 #  - IMAGE_BUILD_PLATFORM=epel-centos7
 
 install:
@@ -30,12 +30,15 @@ script:
   - docklint ${TESTDIR}/${IMAGE_BUILD_PLATFORM}/Dockerfile
   # Build the image
   - docker build -t ${REPO}:${IMAGE_BUILD_PLATFORM} ${TESTDIR}/${IMAGE_BUILD_PLATFORM}/
-  # Launch the container
+  # Launch the containers
   - docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init
-  - DOCKER_CONTAINER_ID=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | awk '{print $1}')
+  - docker run --privileged -d -ti -e "container=docker"  -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init
+  - DOCKER_CONTAINER_ID=$(docker ps | head -1 | grep ${IMAGE_BUILD_PLATFORM} | awk '{print $1}')
+  - DOCKER_CONTAINER_ID2=$(docker ps | tail -1 | grep ${IMAGE_BUILD_PLATFORM} | awk '{print $1}')
   - docker logs $DOCKER_CONTAINER_ID
   # Testing of this ansible-role:
   - docker exec -ti $DOCKER_CONTAINER_ID /bin/sh -c "/$ROLETOTEST/tests/test-in-docker-image.sh"
+  - docker exec -ti $DOCKER_CONTAINER_ID2 /bin/sh -c "/$ROLETOTEST/tests/test-in-docker-image.sh"
   # Print some logs and other useful information for debugging travis:
   - >
     docker exec -ti $DOCKER_CONTAINER_ID /bin/sh -c 'echo -ne "------\nEND ANSIBLE TESTS\n------\nSystemD Units:\n------\n";
@@ -47,6 +50,8 @@ script:
   - docker ps -a
   - docker stop $DOCKER_CONTAINER_ID
   - docker rm -v $DOCKER_CONTAINER_ID
+  - docker stop $DOCKER_CONTAINER_ID2
+  - docker rm -v $DOCKER_CONTAINER_ID2
 
 notifications:
   email: false
