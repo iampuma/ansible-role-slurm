@@ -71,8 +71,7 @@
           mode=0400
     delegate_to: "{{ slurm_accounting_storage_host }}"
     when: slurm_accounting_storage_host != ansible_hostname
-    notify:
-     - restart munge
+    notify: restart munge
 
   - name: start and enable munge on the slurm_accounting_storage_host too if it is different than the service node
     service: name=munge state=started enabled=yes

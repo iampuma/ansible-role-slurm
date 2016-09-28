@@ -42,5 +42,4 @@
 
   - name: template in slurmdbd.conf
     template: src=slurmdbd.conf.j2 dest=/etc/slurm/slurmdbd.conf owner=root mode=0640 backup=yes
-    notify:
-      - AA restart slurmdbd
+    notify: restart slurm

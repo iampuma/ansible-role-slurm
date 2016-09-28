@@ -7,18 +7,18 @@
     command: /bin/true
     notify:
       - restart slurmd
-      - AA restart slurmdbd
       - restart slurmctld
+      - restart slurmdbd
     changed_when: True
 
   - name: restart slurmd
     service: name={{ slurmd_service }} state=restarted
     when: "'slurm_compute' in group_names"
 
+  - name: restart slurmdbd
+    service: name=slurmdbd state=restarted
+    when: slurm_accounting_storage_host == ansible_hostname
+
   - name: restart slurmctld
     service: name={{ slurmctld_service }} state=restarted
     when: "'slurm_service' in group_names"
-
-  - name: AA restart slurmdbd
-    service: name=slurmdbd state=restarted
-    when: slurm_accounting_storage_host == ansible_hostname
