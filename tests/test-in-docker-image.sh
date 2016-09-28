@@ -5,9 +5,7 @@ RDIR="$( dirname "$SOURCE" )"
 SUDO=`which sudo 2> /dev/null`
 SUDO_OPTION=""
 #SUDO_OPTION="--sudo"
-OS_TYPE=${1:-}
-OS_VERSION=${2:-}
-ANSIBLE_VERSION=${3:-}
+ALL_ARGUMENTS=$*
 
 ANSIBLE_VAR=""
 ANSIBLE_INVENTORY="tests/inventory"
@@ -21,13 +19,6 @@ if [ "x$SUDO" == "x" ];then
     SUDO_OPTION=""
 fi
 
-if [ "${OS_TYPE}" == "centos" ];then
-    APACHE_CTL="apachectl"
-    if [ "${OS_VERSION}" == "7" ];then
-        ANSIBLE_VAR="apache_use_service=False"
-    fi
-fi
-
 ANSIBLE_EXTRA_VARS=""
 if [ "${ANSIBLE_VAR}x" == "x" ];then
     ANSIBLE_EXTRA_VARS=" -e \"${ANSIBLE_VAR}\" "
@@ -37,6 +28,13 @@ fi
 cd $RDIR/..
 printf "[defaults]\nroles_path = ../:roles" > ansible.cfg
 printf "" > ssh.config
+
+function show_arguments() {
+
+echo "TEST: All arguments: $ALL_ARGUMENTS"
+echo "TEST: First element: ${ALL_ARGUMENTS[0]}"
+
+}
 
 function show_version() {
 
@@ -145,6 +143,7 @@ set -e
 function main(){
     install_os_deps
 #    install_ansible_devel
+    show_containers
     show_version
     tree_list
     test_install_requirements
