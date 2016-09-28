@@ -143,7 +143,7 @@ set -e
 function main(){
     install_os_deps
 #    install_ansible_devel
-    show_containers
+    show_arguments
     show_version
     tree_list
     test_install_requirements
