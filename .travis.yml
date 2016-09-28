@@ -33,7 +33,7 @@ script:
   # Build the image
   - docker build -t ${REPO}:${IMAGE_BUILD_PLATFORM} ${TESTDIR}/${IMAGE_BUILD_PLATFORM}/
   # Launch the containers
-  - for i in $(seq 1 $CONTAINERS); do docker run --privileged -d -ti --name "slurm-$i" -e "container=docker" -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init; done
+  - for i in $(seq 1 $CONTAINERS); do docker run --privileged -d -ti -e "container=docker" -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init; done
   - docker ps -a
   - export DOCKER_CONTAINER_IDS=$(docker ps | grep ${IMAGE_BUILD_PLATFORM}|awk '{print $1}')
   - DOCKER_CONTAINER_ID=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | head -1 | awk '{print $1}')
