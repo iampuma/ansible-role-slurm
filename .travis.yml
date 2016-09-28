@@ -36,12 +36,13 @@ script:
   - for i in $(seq 1 $CONTAINERS); do docker run --privileged -d -ti -e "container=docker" -v `pwd`:/$ROLETOTEST -v /sys/fs/cgroup:/sys/fs/cgroup  ${REPO}:${IMAGE_BUILD_PLATFORM}  /usr/sbin/init; done
   - docker ps -a
   - export DOCKER_CONTAINER_IDS=$(docker ps | grep ${IMAGE_BUILD_PLATFORM}|awk '{print $1}')
+  - echo $DOCKER_CONTAINER_IDS
   - DOCKER_CONTAINER_ID=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | head -1 | awk '{print $1}')
   - DOCKER_CONTAINER_ID2=$(docker ps | grep ${IMAGE_BUILD_PLATFORM} | tail -1 | awk '{print $1}')
   - docker logs $DOCKER_CONTAINER_ID
   # Testing of this ansible-role:
   - docker exec -ti $DOCKER_CONTAINER_ID /bin/sh -c "/$ROLETOTEST/tests/test-in-docker-image.sh"
-  - docker exec -ti $DOCKER_CONTAINER_ID2 /bin/sh -c "/$ROLETOTEST/tests/test-in-docker-image.sh $DOCKER_CONTAINER_IDS"
+  - docker exec -ti $DOCKER_CONTAINER_ID2 /bin/sh -c "/$ROLETOTEST/tests/test-in-docker-image.sh"
   # Print some logs and other useful information for debugging travis:
   - >
     docker exec -ti $DOCKER_CONTAINER_ID /bin/sh -c 'echo -ne "------\nEND ANSIBLE TESTS\n------\nSystemD Units:\n------\n";
