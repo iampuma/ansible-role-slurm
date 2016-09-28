@@ -12,9 +12,11 @@ localhost
 
 [install]
 localhost
+slurm-1
 
 [compute]
 localhost
+slurm-2
 
 [pxe_bootable_nodes:children]
 compute
