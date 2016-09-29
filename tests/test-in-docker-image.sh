@@ -7,7 +7,7 @@ SUDO_OPTION=""
 #SUDO_OPTION="--sudo"
 ALL_ARGUMENTS=$*
 
-ANSIBLE_VAR=""
+ANSIBLE_VAR="--limit $HOSTNAME"
 ANSIBLE_INVENTORY="tests/inventory"
 ANSIBLE_PLAYBOOk="tests/test.yml"
 #ANSIBLE_LOG_LEVEL=""
@@ -19,7 +19,7 @@ if [ "x$SUDO" == "x" ];then
     SUDO_OPTION=""
 fi
 
-ANSIBLE_EXTRA_VARS="--limit $HOSTNAME"
+ANSIBLE_EXTRA_VARS=""
 if [ "${ANSIBLE_VAR}x" == "x" ];then
     ANSIBLE_EXTRA_VARS=" -e \"${ANSIBLE_VAR}\" "
 fi
