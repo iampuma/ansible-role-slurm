@@ -19,7 +19,7 @@ if [ "x$SUDO" == "x" ];then
     SUDO_OPTION=""
 fi
 
-ANSIBLE_EXTRA_VARS=""
+ANSIBLE_EXTRA_VARS="--limit $HOSTNAME"
 if [ "${ANSIBLE_VAR}x" == "x" ];then
     ANSIBLE_EXTRA_VARS=" -e \"${ANSIBLE_VAR}\" "
 fi
