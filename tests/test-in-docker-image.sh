@@ -9,11 +9,11 @@ OS_TYPE=${1:-}
 OS_VERSION=${2:-}
 ANSIBLE_VERSION=${3:-}
 
-ANSIBLE_VAR="--diff"
+ANSIBLE_VAR=""
 ANSIBLE_INVENTORY="tests/inventory"
 ANSIBLE_PLAYBOOk="tests/test.yml"
 #ANSIBLE_LOG_LEVEL=""
-ANSIBLE_LOG_LEVEL="-vvv"
+ANSIBLE_LOG_LEVEL="-vvv -D"
 APACHE_CTL="apache2ctl"
 
 # if there wasn't sudo then ansible couldn't use it
