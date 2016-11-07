@@ -40,7 +40,11 @@
 
   - name: Make from template slurm.conf
     template: src=slurm.conf.j2 dest=/etc/slurm/slurm.conf owner=root mode=0644 backup=yes
+    register: reg_slurm_conf_template
     notify: restart slurm
+
+  - name: print reg_slurm_conf_template
+    debug: "var=reg_slurm_conf_template verbosity=1"
 
   - name: write all slurm logs handled by rsyslog to one file
     template: src=slurm_rsyslog.conf dest=/etc/rsyslog.d/10_slurm_rsyslog.conf owner=root mode=0644 backup=yes
