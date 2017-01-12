@@ -1,3 +1,7 @@
+# https://github.com/CSC-IT-Center-for-Science/fgci-ansible/tree/openstack
+
+This section is mostly out of date but it might work - See the above link for an updated way of using openstack with this role
+
 ansible-role-slurm
 ------------------
 
