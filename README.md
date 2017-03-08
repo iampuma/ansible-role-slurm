@@ -6,10 +6,10 @@ ansible-role-slurm
 # Creates a SLURM cluster
 
 Tested with SLURM versions:
- - 14.11.0
- - 14.11.3
+ - 14.11.x
  - 15.08.x
  - 16.05.x
+ - 17.02.x 
 
 Tested with these Linux distributions:
  - CentOS 6
@@ -17,6 +17,7 @@ Tested with these Linux distributions:
  - CentOS 7
   - 15.08.x
   - 16.05.x
+  - 17.02.x
 
 ## Dependencies
 
