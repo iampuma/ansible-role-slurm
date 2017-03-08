@@ -36,6 +36,15 @@
      - slurm_systemd_override_slurmdbd: True
      - slurm_systemd_override_slurmctld: True
      - slurm_SlurmctldTimeout: 10
+     - slurm_packages:
+       - slurm
+       - slurm-devel
+       - slurm-perlapi
+       - slurm-pam_slurm
+       - slurm-torque
+       - slurm-munge
+       - slurm-contribs
+
 
 
    pre_tasks:
